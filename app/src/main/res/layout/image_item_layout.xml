@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="nowPlayingMovie"
+            type="com.sedakcan.kotlinmovieapplication.model.NowPlayingMovie" />
+
+        <variable
+            name="listener"
+            type="com.sedakcan.kotlinmovieapplication.adapter.MovieClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{listener::onMovieClicked}">
+
+        <TextView
+            android:id="@+id/tvnowPlayingMovieIdText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(nowPlayingMovie.id)}"
+            android:visibility="gone" />
+
+
+        <ImageView
+            android:id="@+id/ivNowPlayingMovie"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:downloadBackDropUrl="@{nowPlayingMovie.url}"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glInsideOuter1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <TextView
+            android:id="@+id/tvNowPlayingMovieHeader"
+            style="@style/nowPlayingMovieImageHeaderStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{nowPlayingMovie.header}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/glInsideOuter1" />
+
+        <TextView
+            android:id="@+id/tvNowPlayingMovieSummary"
+            style="@style/nowPlayingMovieImageSummaryStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{nowPlayingMovie.summary}"
+            app:layout_constraintEnd_toEndOf="@+id/tvNowPlayingMovieHeader"
+            app:layout_constraintStart_toStartOf="@+id/tvNowPlayingMovieHeader"
+            app:layout_constraintTop_toBottomOf="@id/tvNowPlayingMovieHeader" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
